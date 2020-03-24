@@ -1,0 +1,142 @@
+body {
+  font-family:"Trebuchet MS",Arial,sans-serif ;
+  background-color: rgb(248, 245, 233);
+}
+.petitlogo {
+    width: 70px;
+    height: 65px;
+}
+.groslogo {
+    display: flex;
+    width: 40%;
+    height: 30%; 
+    margin-left: auto;
+    margin-right: auto;   
+}
+.logo {
+    width: 20%;
+    height: 15%;
+}
+ul {
+margin: 0 ;
+  padding: 0 ;
+  list-style: 0 ;
+}
+li {
+  float: left ;
+  width: 150px ;
+  border: 1px solid #f4f7f8 ;
+  margin-right: 1px ;
+  background: rgb(240, 238, 238) ;
+}
+li :visited {
+    color: black;
+}
+li :hover {
+    text-decoration: underline;
+    color: indianred;
+}
+li a {
+display: block ;
+background: rgb(240, 238, 238) ;
+  font: 16px ;
+  line-height: 16px ;
+  padding: 4px 0 ;
+  text-align: center ;
+}
+
+.entete {
+    text-align: center;
+}
+.identite {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    font-size: larger;
+    font-weight: bold;
+}
+.logoacteur {
+    width:20%;  
+    height:15%;  
+}
+.acteurs {
+    background-color: #ffffff;
+    padding: 20px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;   
+} 
+.formulaire input {
+    border-radius: 7px;
+    font-size: 15px;
+}
+.formulaire {
+    margin: 40px;
+    text-align: center;
+    font-size: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background: rgb(240, 238, 238) ;
+}
+.form-control {
+    font-size: 17px;
+    margin: 0px 0px 30px 0px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    border-radius: 5px;
+}
+.valider {
+    position: relative;
+    display: block;
+    text-align: center;    
+}
+
+h2 {
+    text-align: center;
+} 
+.acteurs p {
+    padding: 20px 20px 20px 20px;
+}
+.contenu {
+    text-align: justify;
+    margin: 10px 50px 10px 50px;
+}
+.vote {
+    text-align: center;
+}
+.commentaire {
+    width: 30%;
+    border: 5px solid #e9e1e1;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    box-shadow: 10px 5px 5px grey;
+    padding: 10px;
+    margin: 20px 20px 20px 20px;
+}
+.italic {
+    font-style: italic;
+}
+.footer {
+    margin: 40px;
+    text-align: center;
+    font-size: 15px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background: rgb(240, 238, 238) ;
+}
+footer :visited {
+    color: black;
+}
+footer :hover {
+    text-decoration: underline;
+    color: indianred;
+}
+footer a {
+  font: 16px;
+  line-height: 16px ;
+  padding: 4px 0 ;
+  text-align: center ;
+}
