@@ -73,11 +73,6 @@ foreach ($liste_acteurs as $acteur){
 <?php
 }
 ?>
-<footer class="footer">
- <a href="#">| Mentions légales |</a>
- <a href="#"> Contacts |</a>
-
-</footer>
 
 </body>
 </html>
