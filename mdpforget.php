@@ -14,8 +14,7 @@ if(isset($_GET['step'])) {
 
 try
 {
-    $bdd = new PDO('mysql:host=localhost;dbname=projdwcj_gbaf;charset=utf8', 'projdwcj_root', 'taOR2T6T^M7]');
-
+    $bdd = new PDO('mysql:host=localhost;dbname=gbaf;charset=utf8', 'root', '');
 }
 catch(Exception $e)
 {

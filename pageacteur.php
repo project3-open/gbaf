@@ -13,6 +13,10 @@ catch(Exception $e)
 
 if (!isset($_SESSION['id_user'])) header('Location: connexion.php'); 
 
+
+if (!empty($_GET['acteur']) AND $_GET['acteur'] <= 4)
+{
+
 $id_acteur = $_GET['acteur'];
 $c_msg = "";
 
@@ -179,7 +183,14 @@ if(isset($_GET["vote"])) {
  <a href="#"> Contacts |</a>
 
 </footer>
-
 </div>
+<?php
+}
+else
+{
+ echo 'Cette page n\'existe pas';
+}
+?>
+
 </body>
 </html>

@@ -12,7 +12,9 @@ catch(Exception $e)
 }
 
 if (!isset($_SESSION['id_user'])) header('Location: connexion.php');
+{
 
+   
 if(isset($_POST['newpseudo']))
 {
     $newpseudo = htmlspecialchars($_POST['newpseudo']);
@@ -24,6 +26,7 @@ if(isset($_POST['newpseudo']))
     $newquestion = htmlspecialchars($_POST['newquestion']);
     $newreponse = htmlspecialchars($_POST['newreponse']);
 
+    
     $pseudolength = strlen($newpseudo);
 
     if($pseudolength > 255) 
@@ -41,17 +44,20 @@ if(isset($_POST['newpseudo']))
             $message["erreur"] = "Le pseudo choisit est déjà utilisé";
         }
     }
+    
         
     if($newmotdepasse != $newmotdepasseagain)
     {
         $message["erreur"] = "Vos mots de passes ne correspondent pas !";
     }
     
-    if(!$message["erreur"]) {
-
-        $insertpseudo = $bdd->prepare("UPDATE account SET username = ?, nom = ?, prenom = ?, pass = ?, question = ?, reponse = ? WHERE id_user = ?");
+    
+    if (empty($_POST['newmotdepasse']) AND empty($_POST['newmotdepasseagain']))
+        {
+     
+        $insertpseudo = $bdd->prepare("UPDATE account SET username = ?, nom = ?, prenom = ?, question = ?, reponse = ? WHERE id_user = ?");
         $insertpseudo->execute(array(
-        $newpseudo, $newnom, $newprenom, $pass_hache, $newquestion, $newreponse, $_SESSION['id_user']));
+        $newpseudo, $newnom, $newprenom, $newquestion, $newreponse, $_SESSION['id_user']));
     
         $_SESSION['nom'] = $newnom;
         $_SESSION['prenom'] = $newprenom;
@@ -62,11 +68,30 @@ if(isset($_POST['newpseudo']))
 
         $message["success"] = "Votre profil a bien été mis à jour";    
         
+        }   
+        if (!empty($_POST['newmotdepasse']) AND !empty($_POST['newmotdepasseagain']))
+        {
+     
+        $insertpseudo = $bdd->prepare("UPDATE account SET pass = ? WHERE id_user = ?");
+        $insertpseudo->execute(array(
+        $pass_hache, $_SESSION['id_user']));
+    
+        $_SESSION['nom'] = $newnom;
+        $_SESSION['prenom'] = $newprenom;
+        $_SESSION['username'] = $newpseudo;
+        $_SESSION['question'] = $newquestion;
+        $_SESSION['reponse'] = $newreponse;
+
+
+        $message["success"] = "Votre profil a bien été mis à jour";    
         
+        }   
 
     }
+    
 
-    }
+       
+}
 
 ?>
 <!DOCTYPE html>
@@ -99,7 +124,7 @@ if(isset($_POST['newpseudo']))
 
 <form method="post" class="formulaire">
 
-    <?php
+<?php
     if(isset($message["erreur"]))
     {
         echo "<font color='red'><strong> {$message["erreur"]} </strong></font>";
@@ -113,7 +138,7 @@ if(isset($_POST['newpseudo']))
 <div class="form-control">
     
     
-    <label for="nom">Nom</label>
+    <br><label for="nom">Nom</label>
     <input type="text" id='nom' autofocus="required=" name='newnom' value="<?php echo $_SESSION["nom"];?>">
 
 </div>
@@ -181,4 +206,5 @@ if(isset($_POST['newpseudo']))
  <a href="#"> Contacts |</a>
 
 </footer>
+
 </html>

@@ -13,7 +13,9 @@ catch(Exception $e)
 
 if (!isset($_SESSION['id_user'])) header('Location: connexion.php');
 
-$liste_acteurs = $bdd->query('SELECT * FROM acteur');
+    $liste_acteurs = $bdd->query('SELECT * FROM acteur');
+    
+    
 ?>
 
 <!DOCTYPE html>
@@ -28,10 +30,7 @@ $liste_acteurs = $bdd->query('SELECT * FROM acteur');
 </head>
 
 <body>
-<header class="identite">
-<img src="logo/logo.png" alt="logo" class="petitlogo">
-<p class="identite"><?php echo $_SESSION['prenom'] . ' ' . $_SESSION['nom'] ;?></p>
-</header>
+
 <ul class ="menu">
     <li><a href="profil.php">Mon profil</a></li>
     <li><a href="deconnexion.php">Se déconnecter</a></li>
