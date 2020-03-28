@@ -109,12 +109,7 @@ if(isset($_GET["vote"])) {
 
 <body>
 
-<header class="identite">
-
-    <img src="logo/logo.png" alt="logo" class="petitlogo">
-    <p class="identite"><?php echo $_SESSION['prenom'] . ' ' . $_SESSION['nom'] ;?></p>
-
-</header>
+<?php require 'header.php'; ?>
 
 <ul class ="menu">
 
@@ -177,12 +172,7 @@ if(isset($_GET["vote"])) {
 }
 ?>
 
-<footer class="footer">
-
- <a href="#">| Mentions légales |</a>
- <a href="#"> Contacts |</a>
-
-</footer>
+<?php require 'footer.php'; ?>
 </div>
 <?php
 }

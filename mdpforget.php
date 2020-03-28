@@ -98,8 +98,7 @@ catch(Exception $e)
 
 <header class="identite">
 
-    <img src="logo/logo.png" alt="logo" class="petitlogo">
-    <p class="identite"></p>
+    <img src="logo/logo.png" alt="logogbaf" class="petitlogo">
 
 </header>
 
@@ -211,11 +210,6 @@ if(isset($mdpmess))
 }
 ?>
 
-<footer class="footer">
-
- <a href="#">| Mentions légales |</a>
- <a href="#"> Contacts |</a>
-
-</footer>
+<?php require 'footer.php'; ?>
 </body>
 </html>

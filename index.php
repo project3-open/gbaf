@@ -30,7 +30,7 @@ if (!isset($_SESSION['id_user'])) header('Location: connexion.php');
 </head>
 
 <body>
-
+<?php require 'header.php'; ?>
 <ul class ="menu">
     <li><a href="profil.php">Mon profil</a></li>
     <li><a href="deconnexion.php">Se déconnecter</a></li>
@@ -52,7 +52,7 @@ pouvoirs publics.
             <img src="logo/logo.png" alt="logo" class="logo">
 </div>
 
-    <h2><center>Les différents acteurs</center></h2>
+    <h2>Les différents acteurs</h2>
 
 
 <?php
@@ -62,7 +62,7 @@ foreach ($liste_acteurs as $acteur){
 
     <img src="<?php echo $acteur['logo'];?>" alt="logo" class="logoacteur">
    
-    <h2><center><?php echo $acteur['acteur']; ?><br/></center></h2>
+    <h2><?php echo $acteur['acteur']; ?><br/></h2>
     <p><?php echo substr($acteur['description'], 0, 150);?>...</p>
     
     
@@ -73,6 +73,6 @@ foreach ($liste_acteurs as $acteur){
 <?php
 }
 ?>
-
+<?php require 'footer.php'; ?>
 </body>
 </html>

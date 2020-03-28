@@ -1,3 +1,12 @@
+@media all and (max-width: 700px)
+{
+    .acteurs {
+        color: red;
+        width: 200px;
+        margin-bottom: 15px;
+         
+    } 
+} 
 body {
   font-family:"Trebuchet MS",Arial,sans-serif ;
   background-color: rgb(248, 245, 233);
@@ -60,9 +69,9 @@ background: rgb(240, 238, 238) ;
     height:15%;  
 }
 .acteurs {
-    background-color: #ffffff;
+    background-color: white;
     padding: 20px;
-    width: 50%;
+    width: 700px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 30px;   
@@ -139,4 +148,24 @@ footer a {
   line-height: 16px ;
   padding: 4px 0 ;
   text-align: center ;
+}
+@media all and (max-width: 700px)
+{
+    .acteurs {
+        width: 80%;
+        margin-bottom: 15px;
+         
+    } 
+
+    #question {
+        width: 100%;
+    }
+
+    .commentaire {
+        width: 80%;
+    }
+
+    .contenu {
+        margin: 10px 10px 10px 10px;
+    }
 }

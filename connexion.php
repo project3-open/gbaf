@@ -118,11 +118,6 @@ if(isset($c_connexion))
 }
 ?>
 
-<footer class="footer">
-
- <a href="#">| Mentions légales |</a>
- <a href="#"> Contacts |</a>
-
-</footer>
+<?php require 'footer.php'; ?>
 </body>
 </html>

@@ -4,7 +4,8 @@ try {
     $bdd = new PDO('mysql:host=localhost;dbname=gbaf;charset=utf8', 'root', '');
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-} catch (PDOException $e) {
+} 
+catch (PDOException $e) {
 
 print "Erreur !: " . $e->getMessage() . "<br/>";
 die();
@@ -182,11 +183,6 @@ if(isset($erreur))
 }
 ?>
 
-<footer class="footer">
-
- <a href="#">| Mentions légales |</a>
- <a href="#"> Contacts |</a>
-
-</footer>   
+<?php require 'footer.php'; ?>  
 </body>
 </html>
