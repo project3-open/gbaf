@@ -12,15 +12,7 @@ if(isset($_GET['step'])) {
     }
 }
 
-try
-{
-    $bdd = new PDO('mysql:host=localhost;dbname=gbaf;charset=utf8', 'root', '');
-}
-catch(Exception $e)
-{
-
-        die('Erreur : '.$e->getMessage());
-}
+require_once("database.php");
 
     if(isset($_POST['recup_pseudo'])) {
 

@@ -1,16 +1,6 @@
 <?php
-try {
+require_once("database.php");
 
-    $bdd = new PDO('mysql:host=localhost;dbname=gbaf;charset=utf8', 'root', '');
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-} 
-catch (PDOException $e) {
-
-print "Erreur !: " . $e->getMessage() . "<br/>";
-die();
-
-}
 
 if( isset($_POST['nom']) ) 
 {
@@ -52,8 +42,7 @@ if (!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['pseudo
     'question' => $question,
     'reponse' => $reponse));
                 
-    $erreur = "Votre compte a bien été crée";
-    header('Location: index.php');
+    header('Location: connexion.php');
                 
     }
 

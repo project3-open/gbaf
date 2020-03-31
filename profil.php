@@ -1,15 +1,6 @@
 <?php
 session_start();
-try
-{
-    $bdd = new PDO('mysql:host=localhost;dbname=gbaf;charset=utf8', 'root', '');
-
-}
-catch(Exception $e)
-{
-
-        die('Erreur : '.$e->getMessage());
-}
+require_once("database.php");
 
 if (!isset($_SESSION['id_user'])) header('Location: connexion.php');
 {
@@ -25,11 +16,9 @@ if(isset($_POST['newpseudo']))
     $pass_hache = password_hash($newmotdepasse, PASSWORD_DEFAULT); 
     $newquestion = htmlspecialchars($_POST['newquestion']);
     $newreponse = htmlspecialchars($_POST['newreponse']);
+    $message = null;
 
-    
-    $pseudolength = strlen($newpseudo);
-
-    if($pseudolength > 255) 
+    if(strlen($newpseudo) > 255) 
     {
         $message["erreur"] = "Votre pseudo ne doit pas dépasser 255 caractères !"; 
     }
@@ -43,38 +32,26 @@ if(isset($_POST['newpseudo']))
         {
             $message["erreur"] = "Le pseudo choisit est déjà utilisé";
         }
-    }
-    
-        
+    }       
+
     if($newmotdepasse != $newmotdepasseagain)
     {
         $message["erreur"] = "Vos mots de passes ne correspondent pas !";
     }
     
-    
-    if (empty($_POST['newmotdepasse']) AND empty($_POST['newmotdepasseagain']))
-        {
-     
-        $insertpseudo = $bdd->prepare("UPDATE account SET username = ?, nom = ?, prenom = ?, question = ?, reponse = ? WHERE id_user = ?");
-        $insertpseudo->execute(array(
-        $newpseudo, $newnom, $newprenom, $newquestion, $newreponse, $_SESSION['id_user']));
-    
-        $_SESSION['nom'] = $newnom;
-        $_SESSION['prenom'] = $newprenom;
-        $_SESSION['username'] = $newpseudo;
-        $_SESSION['question'] = $newquestion;
-        $_SESSION['reponse'] = $newreponse;
+    if(!$newmotdepasse) {
 
-
-        $message["success"] = "Votre profil a bien été mis à jour";    
-        
-        }   
-        if (!empty($_POST['newmotdepasse']) AND !empty($_POST['newmotdepasseagain']))
-        {
+        $reqpseudo = $bdd->prepare("SELECT * FROM account WHERE id_user = ?");
+        $reqpseudo->execute(array($_SESSION['id_user']));
+        $userInfo = $reqpseudo->fetch();
+        $newmotdepasse = $userInfo["pass"];
+    }
+    
+    if (!$message["erreur"]) {
      
-        $insertpseudo = $bdd->prepare("UPDATE account SET pass = ? WHERE id_user = ?");
+        $insertpseudo = $bdd->prepare("UPDATE account SET username = ?, nom = ?, prenom = ?, pass = ?, question = ?, reponse = ? WHERE id_user = ?");
         $insertpseudo->execute(array(
-        $pass_hache, $_SESSION['id_user']));
+        $newpseudo, $newnom, $newprenom, $newmotdepasse, $newquestion, $newreponse, $_SESSION['id_user']));
     
         $_SESSION['nom'] = $newnom;
         $_SESSION['prenom'] = $newprenom;

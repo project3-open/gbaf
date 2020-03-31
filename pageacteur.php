@@ -1,24 +1,15 @@
 <?php
 session_start();
-try
-{
-    $bdd = new PDO('mysql:host=localhost;dbname=gbaf;charset=utf8', 'root', '');
-
-}
-catch(Exception $e)
-{
-
-        die('Erreur : '.$e->getMessage());
-}
+require_once("database.php");
 
 if (!isset($_SESSION['id_user'])) header('Location: connexion.php'); 
 
 
-if (!empty($_GET['acteur']) AND $_GET['acteur'] <= 4)
+if (!empty($_GET['acteur']))
 {
 
 $id_acteur = $_GET['acteur'];
-$c_msg = "";
+$message = null;
 
     $liste_post = $bdd->prepare('SELECT * FROM account INNER JOIN post ON account.id_user = post.id_user WHERE id_acteur = ?');
     $liste_post->execute([$id_acteur]);
@@ -27,6 +18,8 @@ $c_msg = "";
     $acteur = $bdd->prepare("SELECT * FROM acteur WHERE id_acteur = ?");
     $acteur->execute([$id_acteur]);
     $acteur=$acteur->fetch();
+
+    if(!$acteur) die('Cette page n\'existe pas');
 
     
 if(isset($_POST['commentaire'])) {
@@ -41,7 +34,7 @@ if(isset($_POST['commentaire'])) {
 
     if($post_exists) {
 
-        $c_erreur .= 'Vous avez déjà commenté '; 
+        $message["erreur"] = 'Vous avez déjà commenté '; 
 
     } else {
 
@@ -51,17 +44,15 @@ if(isset($_POST['commentaire'])) {
             'id_user' => $_SESSION['id_user'],
             'id_acteur' => $id_acteur,
             'commentaire' => $commentaire));
-            $c_msg .= 'Votre commentaire a bien été posté ';
+            $message["success"] = 'Votre commentaire a bien été posté ';
 
     }        
     } else {
 
-        $c_erreur .= "Tous les champs doivent être complétés";
+        $message["erreur"] = "Tous les champs doivent être complétés";
     
     }
-}
-
-if(isset($_GET["vote"])) {
+} elseif(isset($_GET["vote"])) {
 
     $vote = $_GET["vote"];
 
@@ -73,7 +64,7 @@ if(isset($_GET["vote"])) {
 
     if($vote_exists) {
 
-        $c_erreur .= 'Vous avez déjà voté'; 
+        $message["erreur"] = 'Vous avez déjà voté'; 
     } else {
 
         $insvote = $bdd->prepare('INSERT INTO vote (id_user, id_acteur, vote) VALUES (:id_user, :id_acteur, :vote)');
@@ -81,7 +72,7 @@ if(isset($_GET["vote"])) {
                 'id_user' => $_SESSION['id_user'],
                 'id_acteur' => $id_acteur,
                 'vote' => $vote));
-        $c_msg .= 'Merci d\'avoir voté'; 
+                $message["success"] = 'Merci d\'avoir voté'; 
     }
 }
 
@@ -148,10 +139,16 @@ if(isset($_GET["vote"])) {
 
 <div>
 
-    <?php
-    if(isset($c_erreur)) { echo "<font color='red'><strong> $c_msg </strong></font>"; } ?>
-    <?php
-    if(isset($c_msg)) { echo "<font color='green'><strong> $c_msg </strong></font>"; } ?>
+<?php
+    if(isset($message["erreur"]))
+    {
+        echo "<font color='red'><strong> {$message["erreur"]} </strong></font>";
+    }
+    if(isset($message["success"]))
+    {
+        echo "<font color='green'><strong> {$message["success"]} </strong></font>";
+    }
+    ?>   
 
 </div>
 

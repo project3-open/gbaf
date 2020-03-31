@@ -1,16 +1,8 @@
 <?php
 session_start();
-try
-{
-    $bdd = new PDO('mysql:host=localhost;dbname=gbaf;charset=utf8', 'root', '');
+require_once("database.php");
 
-}
-catch(Exception $e)
-{
-
-        die('Erreur : '.$e->getMessage());
-}
-if ( isset( $_POST['pseudoconnect'] ) ) 
+if ( isset($_POST['pseudoconnect'] ) ) 
 { 
     $motdepasseconnect = $_POST['motdepasseconnect'];
     $pseudoconnect = htmlspecialchars($_POST['pseudoconnect']);
